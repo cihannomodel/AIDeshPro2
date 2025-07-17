@@ -16,6 +16,7 @@ export default function LicenseActivation() {
   const [validationResult, setValidationResult] = useState<LicenseValidationResult | null>(null);
   const [currentLicense, setCurrentLicense] = useState(licenseValidator.getCurrentLicense());
   const { toast } = useToast();
+  const [generatedKey, setGeneratedKey] = useState(''); // Eklendi
 
   useEffect(() => {
     // Load current license info on mount
@@ -39,6 +40,7 @@ export default function LicenseActivation() {
       
       if (result.success) {
         setCurrentLicense(licenseValidator.getCurrentLicense());
+        setGeneratedKey(result.license.key); // Oluşturulan anahtarı burada ayarlayın
         toast({
           title: "License Activated!",
           description: `Successfully activated ${result.license?.type} license`,
@@ -71,6 +73,7 @@ export default function LicenseActivation() {
         setCurrentLicense(null);
         setValidationResult(null);
         setLicenseKey('');
+        setGeneratedKey(''); // Lisans kapatıldığında anahtarı temizleyin
         toast({
           title: "License Deactivated",
           description: "License has been deactivated from this domain",
@@ -106,6 +109,7 @@ export default function LicenseActivation() {
       
       if (result.success) {
         setCurrentLicense(licenseValidator.getCurrentLicense());
+        setGeneratedKey(result.license.key); // Demo lisansı için anahtarı ayarlayın
         toast({
           title: "Demo License Activated!",
           description: `Demo ${type} license activated for testing`,
@@ -210,6 +214,20 @@ export default function LicenseActivation() {
                 <AlertDescription>{validationResult.message}</AlertDescription>
               </Alert>
             )}
+
+            {/* Lisans Anahtarınızı Gösterin */}
+            <div className="mt-4">
+              <p className="text-muted-foreground">Lisans Anahtarınız:</p>
+              <input 
+                type="text" 
+                value={generatedKey} 
+                readOnly 
+                className="border p-2 w-full"
+              />
+              <button onClick={() => navigator.clipboard.writeText(generatedKey)}>
+                Anahtarı Kopyala
+              </button>
+            </div>
           </CardContent>
         </Card>
 
@@ -381,16 +399,12 @@ export default function LicenseActivation() {
                     All features + Premium
                   </li>
                   <li className="flex items-center gap-2">
-                    <CheckCircle className="h-3 w-3 text-green-500" />
-                    White-label options
+                    <XCircle className="h-3 w-3 text-red-500" />
+                    Custom support
                   </li>
                   <li className="flex items-center gap-2">
                     <CheckCircle className="h-3 w-3 text-green-500" />
                     Commercial use allowed
-                  </li>
-                  <li className="flex items-center gap-2">
-                    <CheckCircle className="h-3 w-3 text-green-500" />
-                    Multiple projects
                   </li>
                 </ul>
               </div>
