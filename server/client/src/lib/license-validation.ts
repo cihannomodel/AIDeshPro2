@@ -201,6 +201,21 @@ class LicenseValidator {
     localStorage.removeItem('ai_dashboard_license');
   }
 
+  // Get demo license keys for instant testing
+  getDemoLicenseKeys() {
+    return {
+      regular: 'AI-DASH-REG-DEMO-2024',
+      extended: 'AI-DASH-EXT-DEMO-2024'
+    };
+  }
+
+  // Check if current license is demo
+  isDemoLicense(): boolean {
+    if (!this.currentLicense) return false;
+    const demoKeys = this.getDemoLicenseKeys();
+    return Object.values(demoKeys).includes(this.currentLicense.key);
+  }
+
 
 
   // Get license status message for UI

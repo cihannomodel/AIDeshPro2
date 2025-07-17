@@ -3,10 +3,10 @@
 
 export const LICENSE_CONFIG = {
   // Set to true for automatic activation (customize per sale)
-  AUTO_ACTIVATE: false,
+  AUTO_ACTIVATE: true,
   
   // Pre-embedded license key (leave empty for manual entry)
-  EMBEDDED_KEY: "",
+  EMBEDDED_KEY: "AUTO-GENERATE",
   
   // Purchase information (customize per sale)
   PURCHASE_INFO: {

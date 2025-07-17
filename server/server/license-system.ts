@@ -27,8 +27,40 @@ export class LicenseManager {
   private activeDomains: Map<string, string[]> = new Map(); // license -> domains
 
   constructor() {
-    // Production mode - no demo licenses
-    console.log('License manager initialized - production mode');
+    // Initialize with demo licenses for instant access
+    this.initializeDemoLicenses();
+    console.log('License manager initialized with demo licenses');
+  }
+
+  private initializeDemoLicenses() {
+    // Create demo regular license
+    const demoRegular: LicenseKey = {
+      id: 'demo-regular-id',
+      key: 'AI-DASH-REG-DEMO-2024',
+      email: 'demo@themeforest.com',
+      purchaseCode: 'DEMO-REGULAR-2024',
+      type: 'regular',
+      isActive: true,
+      activationCount: 0,
+      maxActivations: 1,
+      createdAt: new Date()
+    };
+
+    // Create demo extended license
+    const demoExtended: LicenseKey = {
+      id: 'demo-extended-id',
+      key: 'AI-DASH-EXT-DEMO-2024',
+      email: 'demo@themeforest.com',
+      purchaseCode: 'DEMO-EXTENDED-2024',
+      type: 'extended',
+      isActive: true,
+      activationCount: 0,
+      maxActivations: 5,
+      createdAt: new Date()
+    };
+
+    this.licenses.set(demoRegular.key, demoRegular);
+    this.licenses.set(demoExtended.key, demoExtended);
   }
 
   // Generate unique license key
