@@ -21,5 +21,9 @@ export default defineConfig({
     host: "0.0.0.0",
     open: true,
     allowedHosts: "all",
+    cors: {
+      origin: true,
+      credentials: true,
+    },
   },
 });
