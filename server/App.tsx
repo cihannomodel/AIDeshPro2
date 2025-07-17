@@ -1,10 +1,19 @@
 // Mobile & PWA pages
 import { lazy, Suspense, useEffect, useState } from "react";
 import { Switch, Route, useLocation } from "wouter";
-import { queryClient } from "./lib/queryClient";
-import { QueryClientProvider } from "@tanstack/react-query";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
+
+// Create a client
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 minutes
+      retry: 1,
+    },
+  },
+});
 import { ThemeProvider } from "@/components/theme/ThemeProvider";
 import Overview from "@/pages/dashboard/Overview";
 import Analytics from "@/pages/dashboard/Analytics";
@@ -98,34 +107,34 @@ function Router() {
       <Route path="/mobile/responsive" component={ResponsivePreview} />
       <Route path="/mobile/pwa" component={PWAFeatures} />
       <Route path="/mobile/offline" component={OfflineStorage} />
-      
+
       {/* Business Intelligence Routes */}
       <Route path="/business/kpi-tracking" component={KPITracking} />
       <Route path="/business/financial-overview" component={FinancialOverview} />
       <Route path="/business/revenue-analytics" component={RevenueAnalytics} />
       <Route path="/business/customer-insights" component={CustomerInsights} />
-      
+
       {/* Data Management Routes */}
       <Route path="/data/data-tables" component={DataTables} />
       <Route path="/data/import-export" component={ImportExport} />
       <Route path="/data/data-sources" component={DataSources} />
       <Route path="/data/api-connections" component={APIConnections} />
-      
+
       {/* AI Features Routes */}
       <Route path="/ai-insights" component={AIInsights} />
       <Route path="/predictive" component={PredictiveAnalytics} />
       <Route path="/recommendations" component={SmartRecommendations} />
       <Route path="/automated" component={AutomatedReports} />
-      
+
       {/* Management Routes */}
       <Route path="/management/users" component={UserManagement} />
       <Route path="/management/teams" component={TeamManagement} />
       <Route path="/management/permissions" component={Permissions} />
       <Route path="/management/activity-logs" component={ActivityLogs} />
-      
+
       {/* License Management */}
       <Route path="/license" component={LicenseActivation} />
-      
+
       {/* Fallback to 404 */}
       <Route component={NotFound} />
     </Switch>
