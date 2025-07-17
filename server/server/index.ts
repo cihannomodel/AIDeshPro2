@@ -3,6 +3,15 @@ import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
 const app = express();
+// Apply Replit-friendly middleware
+app.use((req: Request, res: Response, next: NextFunction) => {
+  const host = req.get('host');
+  if (host && host.endsWith('.replit.dev')) {
+    res.setHeader('Access-Control-Allow-Origin', `https://${host}`);
+  }
+  next();
+});
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
