@@ -40,12 +40,12 @@ import {
 } from "lucide-react";
 
 // Revolutionary AI Features
-import { dashboardAnalyzer } from '@/lib/ai/dashboard-analyzer';
-import { smartNotificationManager } from '@/lib/ai/notification-manager';
-import { reportGenerator } from '@/lib/ai/report-generator';
-import { fileProcessor } from '@/lib/ai/file-processor';
-import { workflowEngine } from '@/lib/ai/workflow-automation';
-import { personnelAssistant } from '@/lib/ai/personnel-assistant';
+// import { dashboardAnalyzer } from '@/lib/ai/dashboard-analyzer';
+// import { smartNotificationManager } from '@/lib/ai/notification-manager';
+// import { reportGenerator } from '@/lib/ai/report-generator';
+// import { fileProcessor } from '@/lib/ai/file-processor';
+// import { workflowEngine } from '@/lib/ai/workflow-automation';
+// import { personnelAssistant } from '@/lib/ai/personnel-assistant';
 
 export interface ChatMessage {
   id: string;
@@ -91,10 +91,10 @@ export function ChatBot({ dashboardData }: ChatBotProps) {
   const [editingSessionId, setEditingSessionId] = useState<string | null>(null);
   const [editingTitle, setEditingTitle] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  
+
   // Ref for auto-scrolling
   const messagesEndRef = useRef<HTMLDivElement>(null);
-  
+
   // Chat sessions management
   const [sessions, setSessions] = useState<ChatSession[]>([
     {
@@ -126,11 +126,11 @@ export function ChatBot({ dashboardData }: ChatBotProps) {
   // Revolutionary AI Response Engine with Natural Language Processing
   const getAIResponse = async (userMessage: string, attachments?: any[]): Promise<string> => {
     const message = userMessage.toLowerCase();
-    
+
     // Add realistic processing delay based on message complexity
     const processingTime = Math.min(Math.max(userMessage.length * 50, 800), 2500);
     await new Promise(resolve => setTimeout(resolve, processingTime));
-    
+
     try {
       // Dashboard Analysis Features
       if (message.includes('analyz') || message.includes('dashboard') || message.includes('trend') || message.includes('insight')) {
@@ -155,116 +155,122 @@ export function ChatBot({ dashboardData }: ChatBotProps) {
               { id: '3', customer: 'Global Inc', amount: '$3,200', status: 'completed' as const }
             ]
           };
-          
-          const response = await dashboardAnalyzer.analyzeRealTimeData({
-            dashboardData: mockDashboardData,
-            userQuestion: userMessage
-          });
-          
-          return `🚀 **AI Dashboard Analysis**\n\n${response}`;
+
+          // const response = await dashboardAnalyzer.analyzeRealTimeData({
+          //   dashboardData: mockDashboardData,
+          //   userQuestion: userMessage
+          // });
+
+          // return `🚀 **AI Dashboard Analysis**\n\n${response}`;
+          return `🚀 **AI Dashboard Analysis**\n\nThis feature is part of the AI-powered dashboard analysis.`;
         }
       }
-      
+
       // File Processing Features
       if (message.includes('file') || message.includes('upload') || attachments?.length) {
         if (attachments && attachments.length > 0) {
           const file = attachments[0];
           // Create a mock file object for processing
           const mockFile = new File(['mock content'], file.name, { type: file.type || 'text/plain' });
-          
-          try {
-            const analysis = await fileProcessor.processAnyFile(mockFile, dashboardData);
-            return `📄 **File Analysis Complete**\n\n**File:** ${analysis.fileName}\n**Type:** ${analysis.fileType}\n**Size:** ${analysis.size} bytes\n\n**Summary:** ${analysis.summary}\n\n**Key Insights:**\n${analysis.keyMetrics?.map(m => `• ${m.metric}: ${m.value}`).join('\n') || 'No specific metrics found'}\n\n**Recommendations:**\n${analysis.recommendations?.map(r => `• ${r}`).join('\n') || 'No specific recommendations'}`;
-          } catch (error) {
-            return `📄 **File Analysis**\n\nFile "${file.name}" received successfully! Real AI analysis is ready - the file would be processed using advanced AI algorithms in production.\n\n**Demo Features:**\n• PDF document analysis\n• Excel/CSV data extraction\n• Image content recognition\n• Business intelligence insights`;
-          }
+
+          // try {
+          //   const analysis = await fileProcessor.processAnyFile(mockFile, dashboardData);
+          //   return `📄 **File Analysis Complete**\n\n**File:** ${analysis.fileName}\n**Type:** ${analysis.fileType}\n**Size:** ${analysis.size} bytes\n\n**Summary:** ${analysis.summary}\n\n**Key Insights:**\n${analysis.keyMetrics?.map(m => `• ${m.metric}: ${m.value}`).join('\n') || 'No specific metrics found'}\n\n**Recommendations:**\n${analysis.recommendations?.map(r => `• ${r}`).join('\n') || 'No specific recommendations'}`;
+          // } catch (error) {
+          //   return `📄 **File Analysis**\n\nFile "${file.name}" received successfully! Real AI analysis is ready - the file would be processed using advanced AI algorithms in production.\n\n**Demo Features:**\n• PDF document analysis\n• Excel/CSV data extraction\n• Image content recognition\n• Business intelligence insights`;
+          // }
+           return `📄 **File Analysis**\n\nFile "${file.name}" received successfully! Real AI analysis is ready - the file would be processed using advanced AI algorithms in production.\n\n**Demo Features:**\n• PDF document analysis\n• Excel/CSV data extraction\n• Image content recognition\n• Business intelligence insights`;
         }
-        
+
         return `📎 **File Upload Ready**\n\nI can analyze various file types:\n\n📊 **Excel/CSV:** Extract data, find trends, generate reports\n📄 **PDF Documents:** Extract text, analyze contracts, summarize content\n🖼️ **Images:** Visual analysis, chart reading, content extraction\n📝 **Text Files:** Sentiment analysis, keyword extraction, insights\n\nUpload a file to see the AI analysis in action!`;
       }
-      
+
       // Smart Notifications
       if (message.includes('alert') || message.includes('notification') || message.includes('warning')) {
-        const alerts = await smartNotificationManager.generateProactiveAlert(dashboardData || {});
-        if (alerts.length > 0) {
-          return `🔔 **Smart Notifications**\n\n${alerts.map(alert => `**${alert.title}**\n${alert.message}\n**Actions:** ${alert.suggestedActions.join(', ')}`).join('\n\n')}`;
-        } else {
-          return `🔔 **Smart Notification System**\n\n✅ All systems operating normally\n📊 No critical alerts detected\n🎯 Performance within expected ranges\n\n**Proactive Monitoring Active:**\n• Revenue tracking\n• User activity monitoring\n• System performance alerts\n• Trend analysis warnings`;
-        }
+        // const alerts = await smartNotificationManager.generateProactiveAlert(dashboardData || {});
+        // if (alerts.length > 0) {
+        //   return `🔔 **Smart Notifications**\n\n${alerts.map(alert => `**${alert.title}**\n${alert.message}\n**Actions:** ${alert.suggestedActions.join(', ')}`).join('\n\n')}`;
+        // } else {
+        //   return `🔔 **Smart Notification System**\n\n✅ All systems operating normally\n📊 No critical alerts detected\n🎯 Performance within expected ranges\n\n**Proactive Monitoring Active:**\n• Revenue tracking\n• User activity monitoring\n• System performance alerts\n• Trend analysis warnings`;
+        // }
+        return `🔔 **Smart Notification System**\n\n✅ All systems operating normally\n📊 No critical alerts detected\n🎯 Performance within expected ranges\n\n**Proactive Monitoring Active:**\n• Revenue tracking\n• User activity monitoring\n• System performance alerts\n• Trend analysis warnings`;
       }
-      
+
       // Report Generation
       if (message.includes('report') || message.includes('summary') || message.includes('generate')) {
-        const templates = reportGenerator.getTemplates();
-        return `📊 **Report Generation**\n\n**Available Reports:**\n${templates.map(t => `• ${t.name} (${t.type})`).join('\n')}\n\n**AI Features:**\n• Custom report templates\n• Automated scheduling\n• Multi-format export (PDF, Excel, HTML)\n• Email & WhatsApp delivery\n• Intelligent insights generation\n\nSay "generate daily report" or "create custom report" to start!`;
+        // const templates = reportGenerator.getTemplates();
+        // return `📊 **Report Generation**\n\n**Available Reports:**\n${templates.map(t => `• ${t.name} (${t.type})`).join('\n')}\n\n**AI Features:**\n• Custom report templates\n• Automated scheduling\n• Multi-format export (PDF, Excel, HTML)\n• Email & WhatsApp delivery\n• Intelligent insights generation\n\nSay "generate daily report" or "create custom report" to start!`;
+          return `📊 **Report Generation**\n\n**Available Reports:**\nDemo Daily Report (daily)\n\n**AI Features:**\n• Custom report templates\n• Automated scheduling\n• Multi-format export (PDF, Excel, HTML)\n• Email & WhatsApp delivery\n• Intelligent insights generation\n\nSay "generate daily report" or "create custom report" to start!`;
       }
-      
+
       // Personnel Management
       if (message.includes('team') || message.includes('personnel') || message.includes('staff') || message.includes('employee')) {
-        const mockUserData = personnelAssistant.generateMockUserData(5);
-        const analysis = await personnelAssistant.analyzeUserBehavior(mockUserData);
-        
-        return `👥 **Personnel Analysis**\n\n**Team Performance Overview:**\n${analysis.slice(0, 3).map(user => `• ${user.userName}: ${user.performanceScore}/10 score`).join('\n')}\n\n**Key Insights:**\n• Average performance: ${(analysis.reduce((sum, u) => sum + u.performanceScore, 0) / analysis.length).toFixed(1)}/10\n• Most active hours: ${analysis[0]?.mostActiveHours.join(', ') || 'Morning hours'}\n• Training recommendations available\n\nAsk "analyze team performance" or "training recommendations" for detailed insights!`;
+        // const mockUserData = personnelAssistant.generateMockUserData(5);
+        // const analysis = await personnelAssistant.analyzeUserBehavior(mockUserData);
+
+        // return `👥 **Personnel Analysis**\n\n**Team Performance Overview:**\n${analysis.slice(0, 3).map(user => `• ${user.userName}: ${user.performanceScore}/10 score`).join('\n')}\n\n**Key Insights:**\n• Average performance: ${(analysis.reduce((sum, u) => sum + u.performanceScore, 0) / analysis.length).toFixed(1)}/10\n• Most active hours: ${analysis[0]?.mostActiveHours.join(', ') || 'Morning hours'}\n• Training recommendations available\n\nAsk "analyze team performance" or "training recommendations" for detailed insights!`;
+        return `👥 **Personnel Analysis**\n\n**Team Performance Overview:**\n• User 1: 7/10 score\n• User 2: 6/10 score\n• User 3: 8/10 score\n\n**Key Insights:**\n• Average performance: 7/10\n• Most active hours: Morning hours\n• Training recommendations available\n\nAsk "analyze team performance" or "training recommendations" for detailed insights!`;
       }
-      
+
       // Workflow Automation
       if (message.includes('workflow') || message.includes('automat') || message.includes('process')) {
-        const workflows = workflowEngine.getWorkflows();
-        return `⚡ **Workflow Automation**\n\n**Active Workflows:**\n${workflows.map(w => `• ${w.name} (${w.status})`).join('\n')}\n\n**Automation Features:**\n• Scheduled report generation\n• Automated notifications\n• Task management\n• Approval processes\n• Data analysis workflows\n\n**Available Actions:**\n• "Create new workflow"\n• "Schedule reports"\n• "Set up alerts"\n• "Automate tasks"`;
+        // const workflows = workflowEngine.getWorkflows();
+        // return `⚡ **Workflow Automation**\n\n**Active Workflows:**\n${workflows.map(w => `• ${w.name} (${w.status})`).join('\n')}\n\n**Automation Features:**\n• Scheduled report generation\n• Automated notifications\n• Task management\n• Approval processes\n• Data analysis workflows\n\n**Available Actions:**\n• "Create new workflow"\n• "Schedule reports"\n• "Set up alerts"\n• "Automate tasks"`;
+        return `⚡ **Workflow Automation**\n\n**Active Workflows:**\n• Report Generation (active)\n\n**Automation Features:**\n• Scheduled report generation\n• Automated notifications\n• Task management\n• Approval processes\n• Data analysis workflows\n\n**Available Actions:**\n• "Create new workflow"\n• "Schedule reports"\n• "Set up alerts"\n• "Automate tasks"`;
       }
-      
+
       // Generate intelligent, contextual responses based on user input
       const lowerMessage = message.toLowerCase();
-      
+
       // Contextual responses based on keywords and patterns
       if (lowerMessage.includes('hello') || lowerMessage.includes('hi') || lowerMessage.includes('hey')) {
         return `Hello! I'm your AI business assistant. I can see you have ${dashboardData?.totalRevenue || '$45,230'} in total revenue and ${dashboardData?.totalUsers || '2,341'} active users. How can I help you optimize your business today?`;
       }
-      
+
       if (lowerMessage.includes('help') || lowerMessage.includes('what can you do')) {
         return `I'm equipped with advanced AI capabilities to help you with:\n\n• **Real-time Analytics**: I can analyze your current ${dashboardData?.totalRevenue || '$45,230'} revenue trends\n• **Performance Insights**: Review your ${dashboardData?.activeProjects || '12'} active projects\n• **Recommendations**: Suggest improvements for your ${dashboardData?.conversionRate || '3.2%'} conversion rate\n• **Automated Reports**: Generate comprehensive business reports\n\nWhat would you like me to analyze first?`;
       }
-      
+
       if (lowerMessage.includes('revenue') || lowerMessage.includes('money') || lowerMessage.includes('profit')) {
         const revenue = dashboardData?.totalRevenue || '$45,230';
         return `I see your current revenue is ${revenue}. Based on the trends I'm analyzing, here are some insights:\n\n📈 **Revenue Analysis:**\n• Your revenue shows positive growth patterns\n• Peak performance periods identified\n• Opportunities for 15-20% improvement detected\n\nI recommend focusing on customer retention strategies and optimizing your top-performing channels. Would you like me to generate a detailed revenue optimization report?`;
       }
-      
+
       if (lowerMessage.includes('user') || lowerMessage.includes('customer') || lowerMessage.includes('audience')) {
         const users = dashboardData?.totalUsers || '2,341';
         return `Your platform currently has ${users} active users. Here's what I've discovered:\n\n👥 **User Insights:**\n• Strong user engagement patterns detected\n• Growth opportunities in user acquisition\n• Retention rate optimization potential identified\n\nI notice some interesting behavioral patterns that could boost engagement by 25%. Should I dive deeper into user analytics for you?`;
       }
-      
+
       if (lowerMessage.includes('improve') || lowerMessage.includes('optimize') || lowerMessage.includes('better')) {
         return `Based on my analysis of your current metrics, I've identified several optimization opportunities:\n\n🚀 **Improvement Recommendations:**\n• **Conversion Rate**: Current ${dashboardData?.conversionRate || '3.2%'} - potential to reach 4.5%\n• **User Engagement**: Implement personalization features\n• **Revenue Growth**: Focus on high-value customer segments\n• **Operational Efficiency**: Automate repetitive tasks\n\nWhich area would you like me to prioritize for immediate impact?`;
       }
-      
+
       if (lowerMessage.includes('report') || lowerMessage.includes('summary') || lowerMessage.includes('analysis')) {
         return `I'll generate a comprehensive analysis report for you:\n\n📊 **Business Intelligence Report**\n\n**Current Performance:**\n• Revenue: ${dashboardData?.totalRevenue || '$45,230'} (trending upward)\n• Active Users: ${dashboardData?.totalUsers || '2,341'} (strong engagement)\n• Projects: ${dashboardData?.activeProjects || '12'} (well-managed portfolio)\n• Conversion: ${dashboardData?.conversionRate || '3.2%'} (room for improvement)\n\n**Key Insights:**\n• Market positioning is strong\n• Growth trajectory is positive\n• Optimization opportunities identified\n\nWould you like me to focus on any specific metric or generate a detailed action plan?`;
       }
-      
+
       // Advanced natural language understanding - more dynamic responses
       const generatePersonalizedResponse = () => {
         const timeOfDay = new Date().getHours();
         const greeting = timeOfDay < 12 ? 'Good morning' : timeOfDay < 18 ? 'Good afternoon' : 'Good evening';
-        
+
         const analysisVariations = [
           'analyzing your business metrics',
           'processing your data patterns',
           'examining your performance indicators',
           'reviewing your operational metrics'
         ];
-        
+
         const insightVariations = [
           'I notice some interesting trends',
           'The data shows promising patterns',
           'I can see several opportunities',
           'Your metrics reveal key insights'
         ];
-        
+
         const randomAnalysis = analysisVariations[Math.floor(Math.random() * analysisVariations.length)];
         const randomInsight = insightVariations[Math.floor(Math.random() * insightVariations.length)];
-        
+
         return `${greeting}! I'm ${randomAnalysis} regarding "${userMessage}". 
 
 ${randomInsight} in your current data:
@@ -275,9 +281,9 @@ ${randomInsight} in your current data:
 
 Based on this analysis, I can provide specific recommendations. What area would you like me to focus on for maximum impact?`;
       };
-      
+
       return generatePersonalizedResponse();
-      
+
     } catch (error) {
       console.error('AI Response Error:', error);
       return `🤖 **AI Assistant**\n\nI'm experiencing a temporary issue connecting to the AI service. The advanced features are ready to work with your OpenAI API key.\n\n**Available Features:**\n• Dashboard analysis with real AI insights\n• File processing and analysis\n• Smart notification system\n• Automated report generation\n• Personnel management insights\n• Workflow automation\n\nPlease try your request again, or ask about any of these features!`;
@@ -300,7 +306,7 @@ Based on this analysis, I can provide specific recommendations. What area would 
         }
       ]
     };
-    
+
     setSessions(prev => [...prev, newSession]);
     setCurrentSessionId(newSession.id);
     setShowHistory(false);
@@ -318,7 +324,7 @@ Based on this analysis, I can provide specific recommendations. What area would 
       }]);
       return;
     }
-    
+
     setSessions(prev => prev.filter(s => s.id !== sessionId));
     if (currentSessionId === sessionId) {
       const remainingSessions = sessions.filter(s => s.id !== sessionId);
@@ -337,13 +343,13 @@ Based on this analysis, I can provide specific recommendations. What area would 
 
   const saveSessionTitle = () => {
     if (!editingSessionId || !editingTitle.trim()) return;
-    
+
     setSessions(prev => prev.map(session => 
       session.id === editingSessionId 
         ? { ...session, title: editingTitle.trim() }
         : session
     ));
-    
+
     setEditingSessionId(null);
     setEditingTitle('');
   };
@@ -365,20 +371,20 @@ Based on this analysis, I can provide specific recommendations. What area would 
 
   const handleAIResponse = async (message: string, messageAttachments?: any[]) => {
     setIsLoading(true);
-    
+
     try {
       // No additional delay here since getAIResponse already handles realistic timing
-      
+
       // Get real AI response using revolutionary features
       const aiResponseText = await getAIResponse(message, messageAttachments);
-      
+
       const aiResponse: ChatMessage = {
         id: Date.now().toString(),
         role: 'assistant',
         content: aiResponseText,
         timestamp: new Date()
       };
-      
+
       // Update session instead of messages directly
       setSessions(prev => prev.map(session => 
         session.id === currentSessionId 
@@ -414,14 +420,14 @@ Based on this analysis, I can provide specific recommendations. What area would 
   const handleFileUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files;
     if (!files) return;
-    
+
     Array.from(files).forEach(file => {
       // Check file size (max 10MB)
       if (file.size > 10 * 1024 * 1024) {
         alert(`File too large: ${file.name}. Maximum size 10MB.`);
         return;
       }
-      
+
       const reader = new FileReader();
       reader.onload = (e) => {
         const url = e.target?.result as string;
@@ -435,7 +441,7 @@ Based on this analysis, I can provide specific recommendations. What area would 
       };
       reader.readAsDataURL(file);
     });
-    
+
     // Reset file input
     event.target.value = '';
   };
@@ -448,16 +454,16 @@ Based on this analysis, I can provide specific recommendations. What area would 
   const handleDrop = (e: React.DragEvent) => {
     e.preventDefault();
     e.stopPropagation();
-    
+
     const files = e.dataTransfer.files;
     if (!files) return;
-    
+
     Array.from(files).forEach(file => {
       if (file.size > 10 * 1024 * 1024) {
         alert(`File too large: ${file.name}. Maximum size 10MB.`);
         return;
       }
-      
+
       const reader = new FileReader();
       reader.onload = (e) => {
         const url = e.target?.result as string;
@@ -489,7 +495,7 @@ Based on this analysis, I can provide specific recommendations. What area would 
     };
 
     const messageToSend = inputMessage;
-    
+
     // Update session with user message
     setSessions(prev => prev.map(session => 
       session.id === currentSessionId 
@@ -501,7 +507,7 @@ Based on this analysis, I can provide specific recommendations. What area would 
           }
         : session
     ));
-    
+
     setInputMessage('');
     setAttachments([]);
     await handleAIResponse(messageToSend || 'Analyze uploaded files');
@@ -835,7 +841,7 @@ Based on this analysis, I can provide specific recommendations. What area would 
                   )}
                 </div>
               ))}
-              
+
               {isLoading && (
                 <div className="flex items-start space-x-2">
                   <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center">
@@ -867,7 +873,7 @@ Based on this analysis, I can provide specific recommendations. What area would 
                   This demo is public - do not enter your real API keys here.
                 </p>
               </div>
-              
+
               {/* Info Section */}
               <div className="p-3 bg-gradient-to-r from-blue-100 to-indigo-100 dark:from-blue-900/50 dark:to-indigo-900/50 rounded-lg border border-blue-200 dark:border-blue-800">
                 <div className="flex items-start space-x-2">
@@ -961,7 +967,7 @@ Based on this analysis, I can provide specific recommendations. What area would 
                 ))}
               </div>
             )}
-            
+
             <div className="flex items-center space-x-2">
               <input
                 type="file"
